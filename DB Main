@@ -1,0 +1,26 @@
+#2017/01-02/13-23
+
+#create database
+CREATE DATABASE APPRIVER;
+
+#use database
+USE APPRIVER;
+
+#create table
+CREATE TABLE MailFilter
+(
+  #declare fields
+  DateTime CHAR(23),
+  MessageClass CHAR(15),
+  UniqueMessageId CHAR(40) PRIMARY KEY, #declare primary
+  SendingIPAddress VARCHAR(39), #IPv6 compatible
+  ReceivingIPAddress VARCHAR(39), #IPv6 compatible
+  CountryOrigin CHAR(2),
+  TestsFailed CHAR(255)
+ );
+
+#load file into table
+LOAD DATA LOCAL INFILE 'C:/Users/boern/Documents/Sp Top Comp Prog/AppRiverDB/mailfilter-20161202.log'
+    INTO TABLE MailFilter
+    COLUMNS TERMINATED BY '\t';
+#(DateTime, MessageClass, UniqueMessageId, SendingIPAddress, ReceivingIPAddress, CountryOrigin, TestsFailed);
